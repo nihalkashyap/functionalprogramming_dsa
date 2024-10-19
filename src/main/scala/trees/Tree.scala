@@ -30,20 +30,21 @@ object Tree {
   private def dfTraverse(bTree: BTree): Unit = {
 
     bTree.root match {
-      case Some(root) => traverse(List(root))
+      case Some(root) =>
+        val traversedNodes = traverse(List(root), Nil)
+        println(traversedNodes)
       case None => println(s"The Binary tree is empty.")
     }
 
     @tailrec
-    def traverse(nodes: List[Node]): Unit = {
+    def traverse(nodes: List[Node], acc: List[Int]): List[Int] = {
       nodes match {
         case ::(head, next) =>
-          println(s"${head.value}")
           val left = head.left
           val right = head.right
-          traverse(left.toList ++ right.toList ++ next)
+          traverse(left.toList ++ right.toList ++ next, head.value :: acc) // append new value to the beginning of the list to keep run time complexity O(1)
 
-        case Nil => println()
+        case Nil => acc.reverse
       }
     }
   }
