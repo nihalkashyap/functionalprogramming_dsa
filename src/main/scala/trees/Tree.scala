@@ -1,5 +1,7 @@
 package trees
 
+import scala.annotation.tailrec
+
 case class Node(value: Int, left: Option[Node], right: Option[Node])
 case class BTree(root: Option[Node])
 
@@ -28,16 +30,20 @@ object Tree {
   private def dfTraverse(bTree: BTree): Unit = {
 
     bTree.root match {
-      case Some(root) => traverse(Some(root))
+      case Some(root) => traverse(List(root))
       case None => println(s"The Binary tree is empty.")
     }
 
-    // TODO Make it tail recursive
-    def traverse(node: Option[Node]): Unit = {
-      node.foreach { node =>
-        println(node.value)
-        traverse(node.left)
-        traverse(node.right)
+    @tailrec
+    def traverse(nodes: List[Node]): Unit = {
+      nodes match {
+        case ::(head, next) =>
+          println(s"${head.value}")
+          val left = head.left
+          val right = head.right
+          traverse(left.toList ++ right.toList ++ next)
+
+        case Nil => println()
       }
     }
   }
