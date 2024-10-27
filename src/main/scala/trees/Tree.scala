@@ -23,29 +23,32 @@ object Tree {
 
     val root = n1
     val bTree = BTree(Some(root))
-    dfTraverse(bTree)
+    dfTraverse(bTree) match {
+      case Left(error) => println(error)
+      case Right(value) => println(value)
+    }
   }
 
   // Depth First Traversal
-  private def dfTraverse(bTree: BTree): Unit = {
+  private def dfTraverse(bTree: BTree): Either[String, List[Int]] = {
 
     bTree.root match {
       case Some(root) =>
         val traversedNodes = traverse(List(root), Nil)
-        println(traversedNodes)
-      case None => println(s"The Binary tree is empty.")
+        Right(traversedNodes)
+      case None => Left(s"The Binary tree is empty.")
     }
+  }
 
-    @tailrec
-    def traverse(nodes: List[Node], acc: List[Int]): List[Int] = {
-      nodes match {
-        case ::(head, next) =>
-          val left = head.left
-          val right = head.right
-          traverse(left.toList ++ right.toList ++ next, head.value :: acc) // append new value to the beginning of the list to keep run time complexity O(1)
+  @tailrec
+  private def traverse(nodes: List[Node], acc: List[Int]): List[Int] = {
+    nodes match {
+      case ::(head, next) =>
+        val left = head.left
+        val right = head.right
+        traverse(left.toList ++ right.toList ++ next, head.value :: acc) // append new value to the beginning of the list to keep run time complexity O(1)
 
-        case Nil => acc.reverse
-      }
+      case Nil => acc.reverse
     }
   }
 }

@@ -1,0 +1,6 @@
+[0m[[0m[31merror[0m] [0m[0m/home/nihalk/Programmes/Scala/FunctionalProgrammingDSA/src/main/scala/trees/Tree.scala:52:3: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
+[0m[[0m[31merror[0m] [0m[0m required: Either[String,List[Int]][0m
+[0m[[0m[31merror[0m] [0m[0m  }[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
