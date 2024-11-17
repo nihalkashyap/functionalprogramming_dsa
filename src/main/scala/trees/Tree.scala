@@ -41,7 +41,7 @@ object Tree {
   }
 
   @tailrec
-  private def traverse(nodes: List[Node], acc: List[Int]): List[Int] = {
+  def traverse(nodes: List[Node], acc: List[Int]): List[Int] = {
     nodes match {
       case ::(head, next) =>
         val left = head.left
