@@ -34,19 +34,19 @@ object Tree {
 
     bTree.root match {
       case Some(root) =>
-        val traversedNodes = traverse(List(root), Nil)
+        val traversedNodes = traverseInPreOrder(List(root), Nil)
         Right(traversedNodes)
       case None => Left(s"The Binary tree is empty.")
     }
   }
 
   @tailrec
-  def traverse(nodes: List[Node], acc: List[Int]): List[Int] = {
+  def traverseInPreOrder(nodes: List[Node], acc: List[Int]): List[Int] = {
     nodes match {
       case ::(head, next) =>
         val left = head.left
         val right = head.right
-        traverse(left.toList ++ right.toList ++ next, head.value :: acc) // append new value to the beginning of the list to keep run time complexity O(1)
+        traverseInPreOrder(left.toList ++ right.toList ++ next, head.value :: acc) // append new value to the beginning of the list to keep run time complexity O(1)
 
       case Nil => acc.reverse
     }

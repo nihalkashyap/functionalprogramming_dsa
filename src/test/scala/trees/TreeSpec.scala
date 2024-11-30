@@ -11,7 +11,7 @@ class TreeSpec extends UnitSpec {
     val root = n1
     val bTree = BTree(Some(root))
 
-    val traversedNodes: List[Int] = Tree.traverse(bTree.root.toList, Nil)
+    val traversedNodes: List[Int] = Tree.traverseInPreOrder(bTree.root.toList, Nil)
     assert(traversedNodes == List(2,4,7,5))
   }
 }
