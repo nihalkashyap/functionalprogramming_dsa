@@ -51,4 +51,19 @@ object Tree {
       case Nil => acc.reverse
     }
   }
+
+  @tailrec
+  def collectLeaves(nodes: List[Node], acc: List[Int]): List[Int] = {
+    nodes match {
+      case ::(head, next) =>
+        val left = head.left
+        val right = head.right
+        val acc0 = if (isNodeLeave(head)) head.value :: acc else acc // append new value to the beginning of the list to keep run time complexity O(1)
+        collectLeaves(left.toList ++ right.toList ++ next, acc0)
+
+      case Nil => acc.reverse
+    }
+  }
+
+  def isNodeLeave(node: Node): Boolean = node.left.isEmpty && node.right.isEmpty
 }
