@@ -25,4 +25,9 @@ class TreeSpec extends UnitSpec {
     val leaves: List[Int] = Tree.collectLeaves(bTree.root.toList, Nil)
     assert(leaves == List(4,5))
   }
+
+  "A BTree calculate height" should "calculate height" in {
+    val height: Int = Tree.calculateHeight(bTree.root.toList, 0)
+    assert(height == 2)
+  }
 }
