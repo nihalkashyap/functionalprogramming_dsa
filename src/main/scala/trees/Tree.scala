@@ -66,4 +66,14 @@ object Tree {
   }
 
   def isNodeLeave(node: Node): Boolean = node.left.isEmpty && node.right.isEmpty
+
+  @tailrec
+  def calculateHeight(nodes: List[Node], level: Int): Int = {
+    nodes match {
+      case ::(head, next) =>
+        val currLevelNodes: List[Node] = nodes.flatMap(n => n.left ++ n.right)
+        calculateHeight(currLevelNodes, level + 1)
+      case Nil => level - 1
+    }
+  }
 }
