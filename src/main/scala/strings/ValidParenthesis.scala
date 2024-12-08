@@ -3,6 +3,14 @@ package strings
 import scala.annotation.tailrec
 
 object ValidParenthesis {
+    def main(args: Array[String]): Unit = {
+      val str = "()()(())"
+      areParenthesisValid(str) match {
+        case Left(exception) => println(s"Error: $exception")
+        case Right(isParenthesisValid) => println(s"Does $str have valid parenthesis: $isParenthesisValid")
+      }
+    }
+
     def areParenthesisValid(str: String): Either[Exception, Boolean] = if (str.isEmpty)
       Left(throw new Exception("String is empty."))
     else areParenthesisValid(str, 0, 0)
